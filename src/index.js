@@ -30,8 +30,11 @@ bot.use(rateLimit(limitConfig));
 registerHandlers(bot);
 
 // 4. Server & Bot Launch Mode
-const mode = process.env.BOT_MODE || 'polling';
+const mode = (process.env.BOT_MODE || (process.env.RENDER ? 'webhook' : 'polling')).toLowerCase();
 const port = process.env.PORT || 3000;
+
+console.log(`🚀 Starting bot in ${mode.toUpperCase()} mode...`);
+if (process.env.RENDER) console.log('☁️ Render environment detected.');
 
 const app = express();
 app.use(helmet()); // Production security
