@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: humanoid-ai-bot
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: BOT_MODE
+        value: webhook
+      - key: NODE_ENV
+        value: production
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: CHANNEL_ID
+        sync: false
+      - key: ADMIN_ID
+        sync: false
+      - key: WEBHOOK_URL
+        sync: false
+        description: "The full public URL of this service on Render + /webhook (e.g. https://xyz.onrender.com/webhook)"
+      - key: AI_API_KEY
+        sync: false
+      - key: AI_BASE_URL
+        value: https://api.deepseek.com
+      - key: AI_MODEL
+        value: deepseek-chat
+      - key: DB_MODE
+        value: json
